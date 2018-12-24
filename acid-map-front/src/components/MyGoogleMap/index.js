@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ReactGoogleMap from './ReactGoogleMap';
+import ReactGoogleMap from 'components/MyGoogleMap/ReactGoogleMap';
 
 const propTypes = {
 	defaultCenter: PropTypes.object.isRequired,

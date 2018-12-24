@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core/';
 
-import MyModal from '../MyModal';
+import MyModal from 'components/MyModal';
 
 const propTypes = {
 	loadingData: PropTypes.bool.isRequired,

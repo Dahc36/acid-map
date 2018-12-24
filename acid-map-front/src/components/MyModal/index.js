@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Button, withStyles } from '@material-ui/core/';
 
-import MaterialUiModal from './MaterialUiModal';
+import MaterialUiModal from 'components/MyModal/MaterialUiModal';
 
 const propTypes = {
 	children: PropTypes.element,

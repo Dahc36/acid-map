@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { CssBaseline, Grid, Paper, Typography, withStyles } from '@material-ui/core/';
 import axios from 'axios';
 
-import MyGoogleMap from './MyGoogleMap';
-import MyModalCountryData from './MyModal/MyModalCountryData';
+import MyGoogleMap from 'components/MyGoogleMap';
+import MyModalCountryData from 'components/MyModal/MyModalCountryData';
 
 class App extends Component {
 	state = {
