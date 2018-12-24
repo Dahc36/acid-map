@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const GOOGLE_API_KEY = 'AIzaSyDg_2zag9cVs0-EsOE3KLj6fKFu67uohHc';
+export const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 const GOOGLE_URL_GEOCODE = 'https://maps.googleapis.com/maps/api/geocode/json';
 export const GOOGLE_URL_MAPS = 'https://maps.googleapis.com/maps/api/js';
 const REST_COUNTRIES_URL = 'https://restcountries.eu/rest/v2/alpha';

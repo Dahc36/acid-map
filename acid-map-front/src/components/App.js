@@ -65,6 +65,7 @@ class App extends Component {
 								options={{
 									draggable: false,
 									draggableCursor:'pointer',
+									fullscreenControl: false,
 									streetViewControl: false,
 									zoomControl: false
 								}}
