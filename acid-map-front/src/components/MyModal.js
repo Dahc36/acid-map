@@ -1,27 +1,38 @@
 import React, { Component } from 'react';
 import { Button, Modal, Typography, withStyles } from '@material-ui/core/';
 
-class MyModal extends Component {
-	render() {
-		const { classes } = this.props;
+const MyModal = (props) => {
+	const renderLoader = (loadingData, selection) => {
 		return (
-			<Modal
-				open={this.props.open}
-				onClose={this.props.onClose}>
-				<div className={classes.modalDiv}>
-					<Typography variant="h6" id="modal-title">
-						Text in a modal
-					</Typography>
-					<Typography variant="subtitle1" id="simple-modal-description">
-						Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-					</Typography>
-					<Button onClick={this.props.onClose} variant="contained" color="primary">
-						Open Modal
-					</Button>
-				</div>
-			</Modal>
+			loadingData ?
+				<div>Loading...</div> :
+				selection ?
+					<div>
+						<Typography variant="h6" id="modal-title">
+							{props.selection.country}
+						</Typography>
+						<Typography variant="subtitle1" id="simple-modal-description">
+							Capital: {props.selection.capital}
+							Latitud: {props.selection.coords.lat}
+							Longitud: {props.selection.coords.long}
+						</Typography>
+					</div> :
+					<div>Hello World!</div>
 		);
 	}
+
+	return (
+		<Modal
+			open={props.open}
+			onClose={props.onClose}>
+			<div className={props.classes.modalDiv}>
+				{renderLoader(props.loadingData, props.selection)}
+				<Button onClick={props.onClose} variant="contained" color="primary">
+					Open Modal
+				</Button>
+			</div>
+		</Modal>
+	);
 };
 
 const styles = theme => ({
