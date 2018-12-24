@@ -52,10 +52,10 @@ class App extends Component {
 				}
 			});
 		const country = filterSearch(countryResponse.data);
-// console.log(country);
+
 		const capitalResponse = await axios.get(`https://restcountries.eu/rest/v2/alpha/${country.short}`);
 		const capital = capitalResponse.data.capital;
-// console.log(capital);
+
 		const capitalCoordsResponse = await axios.get(
 			'https://maps.googleapis.com/maps/api/geocode/json',
 			{
@@ -67,7 +67,7 @@ class App extends Component {
 			}
 		);
 		const capitalCoords = capitalCoordsResponse.data.results[0].geometry.location;
-// console.log(capitalCoords);
+
 		this.setState({
 			selection: {
 				country: country.long,

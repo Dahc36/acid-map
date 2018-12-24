@@ -14,7 +14,7 @@ const MyModal = (props) => {
 						<Typography variant="subtitle1" id="simple-modal-description">
 							Capital: {props.selection.capital}
 							Latitud: {props.selection.coords.lat}
-							Longitud: {props.selection.coords.long}
+							Longitud: {props.selection.coords.lon}
 						</Typography>
 					</div> :
 					<div>Hello World!</div>
