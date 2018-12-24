@@ -27,32 +27,36 @@ export const loadCountryInfo = async (latitude, longitude) => {
 		return null;
 	}
 
-	const countryResponse = await axiosGoogleGeocode.get(
-		'',
-		{
-			params: {
-				latlng: `${latitude},${longitude}`
+	try {
+		const countryResponse = await axiosGoogleGeocode.get(
+			'',
+			{
+				params: {
+					latlng: `${latitude},${longitude}`
+				}
+			});
+		const country = filterCoordSearch(countryResponse);
+
+		const capitalResponse = await axios.get(`${REST_COUNTRIES_URL}/${country.short}`);
+		const capital = capitalResponse.data.capital;
+
+		const capitalCoordsResponse = await axiosGoogleGeocode.get(
+			'',
+			{
+				params: {
+					address: capital,
+					components: `country:${country.short}`
+				}
 			}
-		});
-	const country = filterCoordSearch(countryResponse);
+		);
+		const capitalCoords = capitalCoordsResponse.data.results[0].geometry.location;
 
-	const capitalResponse = await axios.get(`${REST_COUNTRIES_URL}/${country.short}`);
-	const capital = capitalResponse.data.capital;
-
-	const capitalCoordsResponse = await axiosGoogleGeocode.get(
-		'',
-		{
-			params: {
-				address: capital,
-				components: `country:${country.short}`
-			}
-		}
-	);
-	const capitalCoords = capitalCoordsResponse.data.results[0].geometry.location;
-
-	return {
-		country: country.long,
-		capital,
-		coords: capitalCoords
-	};
+		return {
+			country: country.long,
+			capital,
+			coords: capitalCoords
+		};
+	} catch(error) {
+		throw error;
+	}
 }

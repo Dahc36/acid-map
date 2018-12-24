@@ -23,7 +23,7 @@ const MyModal = (props) => {
 		return (
 			closeButtonShow ? 
 				<Button
-					color="primary"
+					color="secondary"
 					className={props.classes.button}
 					onClick={props.onClose}
 					variant="contained">

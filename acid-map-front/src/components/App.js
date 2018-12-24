@@ -9,6 +9,7 @@ class App extends Component {
 	state = {
 		showModal: false,
 		loadingData: false,
+		loadingError: false,
 		selection: null
 	};
 
@@ -23,7 +24,8 @@ class App extends Component {
 	onClickMap = (e) => {
 		this.setState({
 			showModal: true,
-			loadingData: true
+			loadingData: true,
+			loadingError: false
 		});
 		loadCountryInfo(e.latLng.lat(), e.latLng.lng())
 		.then(response => {
@@ -34,6 +36,12 @@ class App extends Component {
 					coords: response.coords
 				},
 				loadingData: false
+			});
+		})
+		.catch(() => {
+			this.setState({
+				loadingData: false,
+				loadingError: true
 			});
 		});
 	}
@@ -52,10 +60,11 @@ class App extends Component {
 					<Grid item xs={12}>
 						<Paper className={classes.paper}>
 							<MyGoogleMap
-								defaultZoom={2}
-								defaultCenter={{ lat: 0, lng: 0 }}
+								defaultZoom={2.575}
+								defaultCenter={{ lat: 20.5, lng: 0 }}
 								options={{
 									draggable: false,
+									draggableCursor:'pointer',
 									streetViewControl: false,
 									zoomControl: false
 								}}
@@ -66,6 +75,7 @@ class App extends Component {
 
 				<MyModalCountryData
 					loadingData={this.state.loadingData}
+					loadingError={this.state.loadingError}
 					onClose={this.onCloseModal}
 					open={this.state.showModal}
 					selection={this.state.selection} />
