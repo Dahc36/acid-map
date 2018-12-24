@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { GOOGLE_API_KEY, GOOGLE_URL_MAPS } from 'api/maps';
 import ReactGoogleMap from 'components/MyGoogleMap/ReactGoogleMap';
 
 const propTypes = {
@@ -21,7 +22,7 @@ const MyGoogleMap = (props) => {
 		containerElement={<div style={{ height: `80vh` }} />}
 		defaultCenter={props.defaultCenter}
 		defaultZoom={props.defaultZoom}
-		googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg_2zag9cVs0-EsOE3KLj6fKFu67uohHc&v=3.exp&language=en"
+		googleMapURL={`${GOOGLE_URL_MAPS}?key=${GOOGLE_API_KEY}&v=3.exp&language=en`}
 		loadingElement={props.loadingElement}
 		mapElement={<div style={{ height: `100%` }} />}
 		onClick={props.onClick}
