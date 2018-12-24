@@ -3,7 +3,7 @@ import { CssBaseline, Grid, Paper, Typography, withStyles } from '@material-ui/c
 import axios from 'axios';
 
 import MyGoogleMap from './MyGoogleMap';
-import MyModal from './MyModal';
+import MyModalCountryData from './MyModal/MyModalCountryData';
 
 class App extends Component {
 	state = {
@@ -76,7 +76,6 @@ class App extends Component {
 			},
 			loadingData: false
 		});
-		console.log('Done');
 	}
 
 	render() {
@@ -92,12 +91,25 @@ class App extends Component {
 				<Grid container className={classes.body}>
 					<Grid item xs={12}>
 						<Paper className={classes.paper}>
-							<MyGoogleMap onClick={this.onClickMap}/>
+							<MyGoogleMap
+								defaultZoom={2}
+								defaultCenter={{ lat: 0, lng: 0 }}
+								options={{
+									draggable: false,
+									streetViewControl: false,
+									zoomControl: false
+								}}
+								onClick={this.onClickMap} />
 						</Paper>
 					</Grid>
 				</Grid>
 
-				<MyModal open={this.state.showModal} onClose={this.onCloseModal} loadingData={this.state.loadingData} selection={this.state.selection}/>
+				<MyModalCountryData
+					loadingData={this.state.loadingData}
+					onClose={this.onCloseModal}
+					open={this.state.showModal}
+					selection={this.state.selection} />
+
 			</Fragment>
 		);
 	}

@@ -1,51 +1,57 @@
-import React, { Component } from 'react';
-import { Button, Modal, Typography, withStyles } from '@material-ui/core/';
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { Button, withStyles } from '@material-ui/core/';
+
+import MaterialUiModal from './MaterialUiModal';
+
+const propTypes = {
+	children: PropTypes.element,
+	closeButtonShow: PropTypes.bool,
+	closeButtonText: PropTypes.string,
+	onClose: PropTypes.func.isRequired,
+	open: PropTypes.bool.isRequired
+};
+
+const defaultProps = {
+	children: <div>Hello Modal!</div>,
+	closeButtonShow: true,
+	closeButtonText: 'Cerrar'
+};
 
 const MyModal = (props) => {
-	const renderLoader = (loadingData, selection) => {
+	function renderButton(closeButtonShow) {
 		return (
-			loadingData ?
-				<div>Loading...</div> :
-				selection ?
-					<div>
-						<Typography variant="h6" id="modal-title">
-							{props.selection.country}
-						</Typography>
-						<Typography variant="subtitle1" id="simple-modal-description">
-							Capital: {props.selection.capital}
-							Latitud: {props.selection.coords.lat}
-							Longitud: {props.selection.coords.lon}
-						</Typography>
-					</div> :
-					<div>Hello World!</div>
+			closeButtonShow ? 
+				<Button
+					color="primary"
+					className={props.classes.button}
+					onClick={props.onClose}
+					variant="contained">
+					{props.closeButtonText}
+				</Button> :
+				null
 		);
 	}
 
 	return (
-		<Modal
-			open={props.open}
-			onClose={props.onClose}>
-			<div className={props.classes.modalDiv}>
-				{renderLoader(props.loadingData, props.selection)}
-				<Button onClick={props.onClose} variant="contained" color="primary">
-					Open Modal
-				</Button>
-			</div>
-		</Modal>
+		<MaterialUiModal
+			onClose={props.onClose}
+			open={props.open}>
+			<Fragment>
+				{props.children}
+				{renderButton(props.closeButtonShow)}
+			</Fragment>
+		</MaterialUiModal>
 	);
 };
 
+MyModal.propTypes = propTypes;
+MyModal.defaultProps = defaultProps;
+
 const styles = theme => ({
-	modalDiv: {
-		top: '45%',
-		left: '45%',
-		transform: 'translate(-45%, -45%)',
-		position: 'absolute',
-		width: theme.spacing.unit * 100,
-		backgroundColor: theme.palette.background.paper,
-		boxShadow: theme.shadows[5],
-		padding: theme.spacing.unit * 4,
-	},
+	button: {
+		float: 'right'
+	}
 });
 
 export default withStyles(styles)(MyModal);

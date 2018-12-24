@@ -1,19 +1,29 @@
 import React from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import PropTypes from 'prop-types';
+import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
+
+const propTypes = {
+	defaultZoom: PropTypes.number.isRequired,
+	defaultCenter: PropTypes.object.isRequired,
+	options: PropTypes.object,
+	onClick: PropTypes.func.isRequired
+};
+
+const defaultProps = {
+	options: {},
+};
 
 const ReactGoogleMap = withScriptjs(withGoogleMap(props => {
 	return (
 		<GoogleMap
-			defaultZoom={2}
-			defaultCenter={{ lat: 0, lng: 0 }}
-			options={{
-				draggable: false,
-				streetViewControl: false,
-				zoomControl: false
-			}}
-			onClick={props.onClick}>
-		</GoogleMap>
+			defaultZoom={props.defaultZoom}
+			defaultCenter={props.defaultCenter}
+			options={props.options}
+			onClick={props.onClick} />
 	);
 }));
+
+ReactGoogleMap.propTypes = propTypes;
+ReactGoogleMap.defaultProps = defaultProps;
 
 export default ReactGoogleMap;
